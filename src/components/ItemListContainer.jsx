@@ -13,7 +13,7 @@ export const ItemListContainer = () => {
 
     useEffect(() => {
         new Promise((resolve, reject) => {
-            setTimeout(/*() => */resolve(data), 2000);
+            setTimeout(() => resolve(data), 2000);
         })
         .then((response) => {
             if(!id) {
