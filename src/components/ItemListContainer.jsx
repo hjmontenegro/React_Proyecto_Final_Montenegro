@@ -35,7 +35,7 @@ export const ItemListContainer = () => {
 
             <Container className="d-flex">
             {items.map((i) => (
-                <Card key={i.id} style={{ width: '300px' }}>
+                <Card key={i.id} style={{ width: 300 }}>
                     <Card.Img variant="top" src={i.img} height={200} />
                     <Card.Body>
                         <Card.Title>{i.name}</Card.Title>
