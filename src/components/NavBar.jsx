@@ -11,8 +11,8 @@ export const NavBar = () => (
             <Navbar.Brand>Ropa Shop</Navbar.Brand>
             <Nav className="me-auto">
                 <Nav.Link as={ NavLink } to="/">Home</Nav.Link>
-                <Nav.Link as={ NavLink } to="/category/zapatillas_hombre">Zapatillas Hombre</Nav.Link>
-                <Nav.Link as={ NavLink } to="/category/zapatillas_mujer">Zapatillas Mujer</Nav.Link>
+                <Nav.Link as={ NavLink } to="/category/zapatillas_running_hombre">Zapatillas Hombre</Nav.Link>
+                <Nav.Link as={ NavLink } to="/category/zapatillas_running_mujer">Zapatillas Mujer</Nav.Link>
             </Nav>
             <CartWidget />
         </Container>
