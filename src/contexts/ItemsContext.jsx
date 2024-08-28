@@ -30,7 +30,7 @@ export const Provider = ({ children }) => {
 
     return (
         <ItemContext.Provider value={{ items, addItem, reset }}>
-            { Children }
+            { children }
         </ItemContext.Provider>  
     );
 };

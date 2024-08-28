@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { ItemContext } from "../contexts/ItemsContext";
+import { CartContext } from "../contexts/cartsContext";
 
 import {
     getFirestore,
@@ -16,8 +16,10 @@ const initialValues = {
 export const Cart = () => {
     const [buyer, setBuyer] = useState(initialValues);
 
-    const { items, reset } = useContext(ItemContext);
-    const total = items.reduce((acc, act) => acc + act,price * act.quantity, 0);
+    const { productosAgregados, clear } = useContext(CartContext);
+    
+    console.log(productosAgregados)
+    const total = productosAgregados.reduce((acc, act) => acc + act.precio * act.quantity, 0);
 
     const handleChange = (event) => {
         setBuyer(prev => {
@@ -28,38 +30,38 @@ export const Cart = () => {
     const handleOrder = (event) => {
         const order = {
             buyer,
-            items,
+            productosAgregados,
             total
         }
+    
+        const db = getFirestore();
+        const orderCollection = collection(db, "orders");
+
+        addDoc(orderCollection, handleOrder.order).then(({id}) => {
+            if(id) {
+                alert(`Su orden: ${id} ha sido completada`);
+                clear()
+                setBuyer(initialValues)
+            }
+        });
     }
-    const db = getFirestore();
-    const orderCollection = collection(db, "orders");
-
-    addDoc(orderCollection, order).then(({id}) => {
-        if(id) {
-            alert(`Su orden: ${id} ha sido completada`);
-            reset()
-            setBuyer(initialValues)
-        }
-    });
-
-    if(!items.length) return "No has elegido productos ";
+    if(!productosAgregados.length) return "No has elegido productos ";
 
     return (
         <>
-            <button onClick={reset}>Reset</button>
-            {items?.map((i) => (
+            <button onClick={ clear }>Reset</button>
+            {productosAgregados?.map((i) => (
                 <div key={i.id}>
-                    <h1>{i.title}</h1>
+                    <h1>{i.name}</h1>
                     <img src={i.img} height={80} />
 
-                    <h2>Cantidad: {i.quantity}</h2>
-                    <h2>Precio: {i.price}</h2>
+                    <h2>Cantidad: {i.stock}</h2>
+                    <h2>Precio: {i.precio}</h2>
                 </div>
             ))};
             <h4>Total: { total }</h4>
             <hr />
-            !!items.length && 
+            !!productosAgregados.length && 
             <form>
                 <div>
                     <label>Nombre</label>

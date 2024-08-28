@@ -5,8 +5,9 @@ export const useCart = () => {
 
 	const addItem = (producto, quantity) => {
 		const { stock, ...rest } = producto
+		console.log("Estoy por aca + " + producto + quantity)
 		const alreadyExists = productosAgregados.some(
-			producto => producto.id === rest.id
+			productoBuscado => productoBuscado.id === rest.id
 		)
 		if (!alreadyExists)
 			setProductosAgregados(prev => [
