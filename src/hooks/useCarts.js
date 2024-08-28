@@ -3,9 +3,11 @@ import { useState } from "react";
 export const useCart = () => {
 	const [productosAgregados, setProductosAgregados] = useState([])
 
-	const addItem = (producto, quantity) => {
+	const addItem = (producto) => {
 		const { stock, ...rest } = producto
-		console.log("Estoy por aca + " + producto + quantity)
+
+		const quantity = producto.quantity;
+		
 		const alreadyExists = productosAgregados.some(
 			productoBuscado => productoBuscado.id === rest.id
 		)

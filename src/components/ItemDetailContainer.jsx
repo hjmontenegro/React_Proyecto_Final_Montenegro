@@ -32,7 +32,6 @@ export const ItemDetailContainer = () => {
     }, [id]);
 
     const onAdd = (count) => {
-        console.log("Me llega esto " + count)
         addItem ({...item, quantity : count})
     };
 

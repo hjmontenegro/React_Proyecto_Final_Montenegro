@@ -7,20 +7,25 @@ import Button from "react-bootstrap/Button";
 
 export const CartWidget = () => {
 	const { productosAgregados, clear } = useContext(CartContext);
-
-	const totalQuantity = () => productosAgregados.reduce((acumulador, valorActual) => acumulador + valorActual.quantity,0);
+	const totalQuantity = () => productosAgregados.reduce((acumulador, valorActual) => acumulador + valorActual.quantity, 0);
     
-	console.log(productosAgregados)
 	return (
 		!!totalQuantity && (
 		<div>
-			<Badge bg="info">
-				<img src="../src/assets/carrito.png" alt="Changuito" width={25} />
-				<span>{totalQuantity}</span>
-			</Badge>
-			<Link to="/cart">
-				<Button>Terminar mi compra</Button>
-			</Link>
+
+			<div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <Link to='/' className="nav-link active">Compras</Link>
+                        </li>
+                    </ul>
+                    <Link to='/cart'>
+                        <Badge color="secondary">
+							<img src="../src/assets/carrito.png" alt="Changuito" width={25} />
+							<span color="black">{totalQuantity()}</span>
+                        </Badge>
+                    </Link>
+                </div>
 		</div>
 			
 		)
